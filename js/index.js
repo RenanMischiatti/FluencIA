@@ -18,7 +18,7 @@ function comecar() {
                 <div class="three-body__dot"></div>
                 <div class="three-body__dot"></div>
             </div>
-        `).fadeIn('fast')
+        `).css('display', 'flex').fadeIn('fast')
             
         
         speech.start()
