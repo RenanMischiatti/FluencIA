@@ -9,12 +9,20 @@ class speechApi {
         this.speechApi = new speechToText();
         this.speechApi.continuous = true
         this.speechApi.lang = lang
-        this.speechApi.onresult = e => {
+        this.speechApi.onresult = async e => {
             var resultIndex = e.resultIndex
-            var transcript = e.results[resultIndex][0].transcript
+            var spokenWord = e.results[resultIndex][0].transcript
 
-           console.log(transcript)
+            console.log(spokenWord)
+            await mostrarNaTela(spokenWord);
+            // responderApi(transcript)
         }
+        this.speechApi.addEventListener("start", () => {
+            iniciarConversa()
+        })
+        this.speechApi.addEventListener("stop", () => {
+            returnToMenu();
+        })
     }
 
     start() {

@@ -3,6 +3,10 @@ function comecar() {
     let idioma = $('#idioma').val()
     let dificuldade = $('#dificuldade').val()
 
+    if (!'SpeechRecognition' in window || !'webkitSpeechRecognition' in window) {
+        alert('O navegador não suporta reconhecimento de fala.');
+        return
+    }
 
     if(!nome.length) {
         alert('É necessário dar o nome');
@@ -19,8 +23,9 @@ function comecar() {
                 <div class="three-body__dot"></div>
             </div>
         `).css('display', 'flex').fadeIn('fast')
-            
-        
-        speech.start()
     })
+
+    speech.start()
+
+    
 }
