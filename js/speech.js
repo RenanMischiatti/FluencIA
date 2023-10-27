@@ -13,9 +13,10 @@ class speechApi {
             var resultIndex = e.resultIndex
             var spokenWord = e.results[resultIndex][0].transcript
 
-            console.log(spokenWord)
-            await mostrarNaTela(spokenWord);
-            // responderApi(transcript)
+
+            await mostrarNaTela(spokenWord, true);
+            await falar(spokenWord, lang)
+            // await responderApi(spokenWord)
         }
         this.speechApi.addEventListener("start", () => {
             iniciarConversa()
@@ -32,4 +33,17 @@ class speechApi {
     stop() {
         this.speechApi.stop()
     }
+}
+
+async function falar(msg, lang) {
+    var synth = window.speechSynthesis;
+
+    var textoParaFalar = new SpeechSynthesisUtterance(msg);
+    textoParaFalar.lang = lang;
+
+    var vozes = synth.getVoices();
+    textoParaFalar.voice = vozes[0]; 
+
+
+    synth.speak(textoParaFalar);
 }

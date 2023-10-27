@@ -3,10 +3,8 @@ function comecar() {
     let idioma = $('#idioma').val()
     let dificuldade = $('#dificuldade').val()
 
-    if (!'SpeechRecognition' in window || !'webkitSpeechRecognition' in window) {
-        alert('O navegador não suporta reconhecimento de fala.');
-        return
-    }
+    if(!verificarNavegador()) return;
+
 
     if(!nome.length) {
         alert('É necessário dar o nome');
@@ -28,4 +26,16 @@ function comecar() {
     speech.start()
 
     
+}
+function verificarNavegador() {    
+    if (!'SpeechRecognition' in window || !'webkitSpeechRecognition' in window) {
+        alert('O navegador não suporta reconhecimento de fala.');
+        return false
+    }
+    if (!'speechSynthesis' in window) {
+        alert('Este navegador não suporta a API de fala.');
+        return false;
+    }
+
+    return true;
 }
